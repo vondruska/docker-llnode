@@ -1,4 +1,7 @@
 # docker-llnode
+
+[![pipeline status](https://gitlab.com/vondruska/docker-llnode/badges/master/pipeline.svg)](https://gitlab.com/vondruska/docker-llnode/commits/master)
+
 ## What is this?
 Simple docker image to allow a developer with a Node core dump to investigate and diagnose without getting into dependency hell. Especially if you're on a Windows machine.
 
