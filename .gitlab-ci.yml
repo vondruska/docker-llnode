@@ -36,6 +36,8 @@ node12:
 latest:
   stage: latest
   image: docker
+  services:
+    - docker:dind
   before_script:
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
   script:
