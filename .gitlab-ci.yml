@@ -4,6 +4,7 @@ stages:
 
 variables:
   REGISTRY_IMAGE: "vondruska/llnode"
+  LATEST_NODE: "12"
   
 .docker_build:
   stage: docker
@@ -41,7 +42,8 @@ latest:
   before_script:
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
   script:
-    - docker tag "$REGISTRY_IMAGE:12" "$REGISTRY_IMAGE:latest"
+    - docker pull "$REGISTRY_IMAGE:$LATEST_NODE"
+    - docker tag "$REGISTRY_IMAGE:$LATEST_NODE" "$REGISTRY_IMAGE:latest"
     - docker push "$REGISTRY_IMAGE"
   only:
     - master
