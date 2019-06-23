@@ -1,45 +1,45 @@
 stages:
   - docker
+  - latest
 
 variables:
   REGISTRY_IMAGE: "vondruska/llnode"
-
+  
+.docker_build:
+  stage: docker
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+  script:
+    - docker build --pull -t "$REGISTRY_IMAGE:$NODE_VERSION" --build-arg NODE_VERSION .
+    - docker push "$REGISTRY_IMAGE"
+  only:
+    - master
 
 node8:
-  stage: docker
-  image: docker:latest
+  extends: .docker_build
   variables:
     NODE_VERSION: "8"
-  services:
-    - docker:dind
-  before_script:
-    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
-  script:
-    - docker build --pull -t "$REGISTRY_IMAGE:$NODE_VERSION" --build-arg NODE_VERSION .
-    - docker push "$REGISTRY_IMAGE"
 
 node10:
-  stage: docker
-  image: docker:latest
+  extends: .docker_build
   variables:
     NODE_VERSION: "10"
-  services:
-    - docker:dind
-  before_script:
-    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
-  script:
-    - docker build --pull -t "$REGISTRY_IMAGE:$NODE_VERSION" --build-arg NODE_VERSION .
-    - docker push "$REGISTRY_IMAGE"
 
 node12:
-  stage: docker
-  image: docker:latest
+  extends: .docker_build
   variables:
     NODE_VERSION: "12"
-  services:
-    - docker:dind
+
+latest:
+  stage: latest
+  image: docker
   before_script:
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
   script:
-    - docker build --pull -t "$REGISTRY_IMAGE:$NODE_VERSION" -t "$REGISTRY_IMAGE:latest" --build-arg NODE_VERSION .
+    - docker tag "$REGISTRY_IMAGE:12" "$REGISTRY_IMAGE:latest"
     - docker push "$REGISTRY_IMAGE"
+  only:
+    - master
