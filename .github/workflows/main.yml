@@ -26,7 +26,7 @@ jobs:
     - name: Build docker image
       env:
         NODE_VERSION: ${{ matrix.node }}
-      run:  docker build --pull -t "$IMAGE_NAME:$NODE_VERSION" --build-arg NODE_VERSION
+      run:  docker build --pull -t "$IMAGE_NAME:$NODE_VERSION" --build-arg NODE_VERSION .
 
     - name: Tag latest
       if: env.LATEST == matrix.node
