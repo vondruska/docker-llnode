@@ -40,5 +40,7 @@ jobs:
         docker push "$IMAGE_NAME:latest"
 
     - name: Push images
+      env:
+        NODE_VERSION: ${{ matrix.node }}
       if: github.ref == 'refs/heads/master'
       run: docker push "$IMAGE_NAME:$NODE_VERSION"
