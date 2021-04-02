@@ -27,8 +27,7 @@ This uses `node:{version}-slim` for the base image. Right now there are tags for
 `latest` is Node 12.
 
 ## Helpful commands for a user (or future Steven)
-
-`v8 findjsobjects` = object types, size and instances
-`v8 findjsobjects -d` = get object grouped with similar attributes
-`v8 findjsinstances -n 100 {type}` = get the js instances of that type. limited to 100
-`v8 inspect {address}` = inspect instance with the address
+* `v8 findjsobjects` = object types, size and instances
+* `v8 findjsobjects -d` = get object grouped with similar attributes
+*  `v8 findjsinstances -n 100 {type}` = get the js instances of that type. limited to 100
+* `v8 inspect {address}` = inspect instance with the address
