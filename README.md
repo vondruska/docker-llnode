@@ -11,12 +11,12 @@ Simple docker image to allow a developer with a Node core dump to investigate an
 
 Linux-y:
 ```
-docker run -it -v "~/server.dump:/dump/core.dump" vondruska/llnode:latest
+docker run --rm -it -v "~/server.dump:/dump/core.dump" vondruska/llnode:latest
 ```
 
 Windows:
 ```
-docker run -it -v "C:/Users/vondruska/server.dump:/dump/core.dump" vondruska/llnode:latest
+docker run --rm -it -v "C:/Users/vondruska/server.dump:/dump/core.dump" vondruska/llnode:latest
 ```
 
 
