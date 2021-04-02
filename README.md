@@ -25,3 +25,10 @@ docker run -it -v "C:/Users/vondruska/server.dump:/dump/core.dump" vondruska/lln
 This uses `node:{version}-slim` for the base image. Right now there are tags for Node 8, 10 and 12. `vondruska/llnode:8`,  `vondruska/llnode:10` and `vondruska/llnode:12` respectively.
 
 `latest` is Node 12.
+
+## Helpful commands for a user (or future Steven)
+
+`v8 findjsobjects` = object types, size and instances
+`v8 findjsobjects -d` = get object grouped with similar attributes
+`v8 findjsinstances -n 100 {type}` = get the js instances of that type. limited to 100
+`v8 inspect {address}` = inspect instance with the address
